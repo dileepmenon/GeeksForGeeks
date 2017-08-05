@@ -12,7 +12,7 @@ class Node:
         self.left = None
         self.key = k
 '''
-
+# Time Complexity: O(number of nodes) solution
 
 s = []
 
