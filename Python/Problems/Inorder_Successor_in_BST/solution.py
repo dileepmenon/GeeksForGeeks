@@ -23,7 +23,7 @@ def inorder_trav(root):
     if root.right:
         inorder_trav(root.right)
 
-
+# Time Complexity is O(number of nodes)
 def inorderSuccessor(root, X):
 	inorder_trav(root)
 	succ = None
