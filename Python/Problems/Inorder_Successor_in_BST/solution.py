@@ -11,27 +11,36 @@ class Node:
         self.left = None
         self.key = k
 '''
-# your task is to complete this function
-# function should return kth smallest element from the BST
-inord = []
 
 
-def inorder_trav(root):
-    if root.left:
-        inorder_trav(root.left)
-    inord.append(root)
-    if root.right:
-        inorder_trav(root.right)
+def getsuccessor(root, X, recent_left_node):
+	if X.data == root.data:
+		if root.right:
+			if not root.right.left:
+				return root.right
+			else:
+				return root
+		else:
+			if recent_left_node:
+				return recent_left_node
+			else:
+			    return -1
+	if X.data > root.data:
+		return getsuccessor(root.right, X, recent_left_node)
+	if X.data < root.data:
+		recent_left_node = root
+		return getsuccessor(root.left, X, recent_left_node)
 
-# Time Complexity is O(number of nodes)
+
 def inorderSuccessor(root, X):
-	inorder_trav(root)
-	succ = None
-	for i in inord:
-	    if i.data > X.data:
-	        succ = i
-	        break
-	if succ:
-	    return succ
+	succ = getsuccessor(root, X, None)
+	if succ == -1:
+	    return None
+	if succ.data == X.data:
+	    succ = succ.right
+	    while succ:
+	        temp = succ
+	        succ = succ.left
+	    return temp
 	else:
-	    pass
+	    return succ
