@@ -1,15 +1,17 @@
 #!bin/python3
 
+
+def is_pythagorean_triplet(arr):
+    for i, n_i in enumerate(arr):
+        for j in range(i, len(arr)-1):
+            if n_i + arr[j] in arr[1:]:
+                return 'Yes'
+    return 'No'
+
+
 num_t = int(input())
-all_brac = ['{}' , '()', '[]']
 for i in range(num_t):
-    num_brac = {'{':0, '}':0, '(':0, ')':0, '[':0, ']':0}
-    s = input()
-    for j in s:
-        num_brac[j] += 1
-    bool_t = [True if num_brac[m[0]] == num_brac[m[1]] else False
-              for m in all_brac]
-    if all(bool_t):
-        print('balanced')
-    else:
-        print('not balanced')
+    n = int(input())
+    arr = list(map(int, input().strip().split()))
+    srt_arr_sqr = sorted(list(map(lambda x: x**2, arr)))
+    print(is_pythagorean_triplet(srt_arr_sqr))
