@@ -1,20 +1,27 @@
-def KP(item_val, item_wt, w_left):
-    if w_left <= 0 or not item_val:
-        return 0
-    elif w_left-item_wt[0] <= 0:
-        return KP(item_val[1:], item_wt[1:], w_left)
-    else:
-        return (max(item_val[0]
-                    + KP(item_val[1:], item_wt[1:], w_left-item_wt[0]),
-                    KP(item_val[1:], item_wt[1:], w_left)
-                   )
-               )
+#!bin/python3
 
+
+def KP(w_l, p_l, W):
+    if not w_l:
+        return 0
+    if W == 0:
+        return 0
+    try:
+        return d[(p_l[0], len(p_l), W)]
+    except:
+        if W-w_l[0] >= 0:
+            s = max(p_l[0] + KP(w_l[1:], p_l[1:], W-w_l[0]),
+                	KP(w_l[1:], p_l[1:], W))
+        else:
+            s = KP(w_l[1:], p_l[1:], W)
+    d[(p_l[0], len(p_l), W)] = s
+    return s
 
 num_t = int(input())
 for i in range(num_t):
     n = int(input())
-    w_max = int(input())
-    item_val = list(map(int, input().strip().split(' ')))
-    item_wt = list(map(int, input().strip().split(' ')))
-    print (KP(item_val, item_wt, w_max))
+    W = int(input())
+    p_l = list(map(int, input().strip().split()))
+    w_l =  list(map(int, input().strip().split()))
+    d = {}
+    print(KP(w_l, p_l, W))
