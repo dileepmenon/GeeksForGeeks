@@ -14,13 +14,11 @@ def merge(arr, l, m, r):
     i = l
     j = m + 1
     global coun
-    k = 0
     while i <= m and j <= r:
         if arr[i] < arr[j]:
             mrg.append(arr[i])
             i += 1
         elif arr[i] > arr[j]:
-            k += 1
             mrg.append(arr[j])
             coun += len(arr[i:m+1])
             j += 1
