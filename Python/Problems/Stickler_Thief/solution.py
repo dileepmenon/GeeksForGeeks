@@ -1,22 +1,21 @@
 #!bin/python3
 
 
-def MS(arr_h):
-    if len(arr_h) == 1:
-        return arr_h[0]
-    if not arr_h:
+def get_max(arr):
+    if not arr:
         return 0
-    if len(arr_h) <= len(MS_Array):
-        return MS_Array[len(arr_h) - 1]
-    t = max(arr_h[0] + MS(arr_h[2:]),
-            MS(arr_h[1:]))
-    MS_Array.append(t)
-    return t
+    try:
+        return d[(arr[0], len(arr))]
+    except:
+        s =  max(arr[0] + get_max(arr[2:]),
+                 get_max(arr[1:]))
+        d[(arr[0], len(arr))] = s
+        return s
 
 
 num_t = int(input())
 for i in range(num_t):
-    MS_Array = [0]
-    num_h = int(input())
-    arr_h = list(map(int, input().split()))
-    print(MS(arr_h))
+    n = int(input())
+    d = {}
+    arr = list(map(int, input().strip().split()))
+    print(get_max(arr))
